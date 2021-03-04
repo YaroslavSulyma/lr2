@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
+const bodyParser = require('body-parser');
 
 app.set('views', __dirname + '/views');
+app.use(bodyParser.urlencoded({ extended: false }));
 
 /*app.get('*', function (req, res) {
     res.send('Hello World!');
@@ -20,6 +22,10 @@ app.set('views', __dirname + '/views');
 
 app.get('/', function (req, res) {
     res.render('index', {user: 'Vasya'});
+});
+
+app.post('/login',function(req,res){
+    res.render('index',{user: req.body.user});
 });
 
 app.listen(3000, function () {
